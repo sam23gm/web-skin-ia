@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MySkinProgress AI | Smart Skincare Review Analyzer</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Playfair Display -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F9FA;
+        }
+        .serif-title {
+            font-family: 'Playfair Display', serif;
+            letter-spacing: -0.01em;
+        }
+        .mono-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(229, 231, 235, 0.6);
+        }
+        .hero-banner {
+            background-image: linear-gradient(to right, rgba(248, 249, 250, 0.95) 45%, rgba(248, 249, 250, 0.75) 100%), 
+                              url('https://images.unsplash.com/photo-1612817288484-6f916006741a?q=80&w=1200&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+        .animated-pulse-slow {
+            animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+    </style>
+</head>
+<body class="text-stone-800 antialiased">
+
+    <!-- Top Banner: Información Científica / Tesis -->
+    <div class="bg-stone-900 text-stone-300 text-[11px] py-2.5 px-4 text-center border-b border-stone-800 tracking-wide">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
+            <span>🔬 <strong class="text-white font-medium">INVESTIGACIÓN CIENTÍFICA 2026:</strong> Modelo de Procesamiento del Lenguaje Natural para la Detección de Reseñas Patrocinadas en Productos de Cuidado de la Piel</span>
+            <div class="flex gap-2 text-stone-400 font-mono text-[10px]">
+                <span class="bg-stone-800 px-2 py-0.5 rounded border border-stone-700">mBERT</span>
+                <span class="bg-stone-800 px-2 py-0.5 rounded border border-stone-700">Mean Pooling</span>
+                <span class="bg-stone-800 px-2 py-0.5 rounded border border-stone-700">XGBoost</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navegación Premium -->
+    <header class="glass-card sticky top-0 z-50 transition-all duration-300 border-b border-gray-200/50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-4">
+
+    <!-- Logo -->
+    <div class="w-14 h-14 rounded-xl overflow-hidden shadow-md border border-pink-100 bg-white">
+
+    <img
+        src="/static/logo.png"
+        alt="MySkinProgress AI"
+        class="w-full h-full object-cover">
+
+    </div>
+
+    <!-- Nombre -->
+    <div>
+
+        <h1 class="serif-title text-2xl font-semibold tracking-tight">
+
+            <span class="text-stone-900">
+                MySkinProgress
+            </span>
+
+            <span class="bg-gradient-to-r from-stone-800 via-amber-700 to-stone-500 bg-clip-text text-transparent">
+
+                AI
+
+            </span>
+
+        </h1>
+
+        <p class="text-[10px] tracking-[0.25em] uppercase text-stone-400 font-semibold">
+
+            SMART SKINCARE REVIEW ANALYZER
+
+        </p>
+
+    </div>
+
+</div>
+            
+            <nav class="hidden md:flex gap-8 text-xs font-semibold tracking-wider uppercase text-stone-500">
+                <a href="#dashboard" class="hover:text-stone-900 transition-colors">Estadísticas</a>
+                <a href="#metodologia" class="hover:text-stone-900 transition-colors">Metodología</a>
+            </nav>
+
+            <div class="flex items-center gap-3">
+                <span class="text-[11px] bg-emerald-50 text-emerald-800 border border-emerald-100 px-3 py-1.5 rounded-full font-medium flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
+                    mBERT Activo
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- BANNER HERO PRINCIPAL CON EL DETECTOR INTEGRADO EN PRIMERA FILA -->
+    <section class="hero-banner border-b border-gray-200">
+        <div class="container mx-auto px-6 py-12 md:py-20 max-w-7xl">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Columna Izquierda: Información Académica de la Tesis -->
+                <div class="lg:col-span-6 space-y-6">
+                    <span class="text-[10px] uppercase tracking-widest text-stone-500 font-bold bg-white/85 px-3 py-1.5 rounded-full border border-stone-200 shadow-sm">
+                        Clasificador de Reseñas de Skincare
+                    </span>
+                    <h2 class="serif-title text-4xl md:text-5xl leading-[1.15] text-stone-900 font-normal">
+                        Detección de Reseñas Patrocinadas mediante <span class="italic">IA - Procesamiento del Lenguaje Natural</span>
+                    </h2>
+                    <p class="text-stone-600 text-sm md:text-base leading-relaxed font-light">
+                        Clasifica reseñas sobre productos del cuidado de la piel en tiempo real para mejorar la confiabilidad al momento de tomar decisiones de compra. Este prototipo procesa texto en lenguaje natural usando la arquitectura combinada de <strong class="font-medium text-stone-800">mBERT</strong> para embeddings, reducción mediante <strong class="font-medium text-stone-800">Mean Pooling</strong> y clasificación final probabilística entrenada con <strong class="font-medium text-stone-800">XGBoost</strong>.
+                    </p>
+                    <div class="flex gap-4 pt-2">
+                        <a href="#tienda" class="bg-white/85 hover:bg-white text-stone-800 border border-stone-250 text-xs font-medium px-5 py-3 rounded-lg tracking-wider uppercase transition-all shadow-sm">
+                            Ver Feed de Reseñas Clasificadas
+                        </a>
+                        <a href="#metodologia" class="text-stone-600 hover:text-stone-900 text-xs font-semibold px-5 py-3 tracking-wider uppercase transition-all flex items-center gap-1">
+                            Metodología Aplicada &rarr;
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Columna Derecha: El Analizador / Predictor Principal -->
+                <div class="lg:col-span-6">
+                    <div class="bg-white/95 rounded-2xl p-6 md:p-7 shadow-xl border border-stone-200/80 backdrop-blur-md">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="scan-face" class="text-stone-700 w-5 h-5"></i>
+                                <h3 class="serif-title text-lg font-medium text-stone-900">Ingreso de Reseña a Clasificar</h3>
+                            </div>
+                            <span class="text-[9px] uppercase tracking-wider text-stone-400 font-bold font-mono">mBERT Input Gate</span>
+                        </div>
+
+                        <div class="space-y-4">
+                            <textarea id="customReviewText" rows="4" placeholder="Pega o escribe aquí la reseña de skincare para clasificarla..." class="w-full bg-stone-50 border border-stone-200 rounded-xl p-4 text-sm text-stone-800 placeholder-stone-400 focus:ring-1 focus:ring-stone-400 focus:bg-white outline-none transition-all resize-none"></textarea>
+                            <div id="predictionResult"
+                                class="hidden mt-4 rounded-xl border p-5 bg-stone-50">
+
+                                <h3 id="predictionLabel"
+                                    class="text-2xl font-bold text-stone-900">
+                                </h3>
+                                <p id="predictionMessage"
+                                class="mt-3 text-sm leading-7 text-stone-600">
+                                </p>
+
+                                <p class="mt-2 text-sm text-stone-600">
+                                    Confianza:
+                                    <span id="predictionConfidence"
+                                        class="font-semibold"></span>
+                                </p>
+
+                                <p class="text-sm text-stone-600">
+                                    Tiempo de inferencia:
+                                    <span id="predictionTime"
+                                        class="font-semibold"></span>
+                                </p>
+                                <div class="mt-5 p-4 rounded-lg bg-sky-50 border border-sky-100">
+
+                                    <h4 class="font-semibold text-sky-800 mb-2">
+                                        💡 ¿Qué significa este resultado?
+                                    </h4>
+
+                                    <p id="predictionAdvice"
+                                    class="text-sm text-sky-700 leading-6">
+                                    </p>
+
+                                </div>
+
+                            </div>
+                            <div class="flex flex-wrap gap-2 justify-between items-center">
+                                <div class="flex gap-2">
+                                    <button onclick="quickFill('organic')" class="text-[10px] bg-emerald-50/60 hover:bg-emerald-50 text-emerald-850 px-3 py-1.5 rounded-lg border border-emerald-100 tracking-wide transition-colors">
+                                        ✓ Cargar Orgánica
+                                    </button>
+                                    <button onclick="quickFill('sponsored')" class="text-[10px] bg-amber-50/60 hover:bg-amber-50 text-amber-850 px-3 py-1.5 rounded-lg border border-amber-100 tracking-wide transition-colors">
+                                        ⚠ Cargar Patrocinada
+                                    </button>
+                                </div>
+                                
+                                <button onclick="analyzeCustomReview()" class="bg-stone-900 hover:bg-stone-800 text-white text-xs font-semibold px-5 py-2.5 rounded-lg tracking-wider uppercase transition-all shadow-sm flex items-center gap-2">
+                                    <i data-lucide="scan-search" class="w-4 h-4"></i> Analizar reseña
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <main class="container mx-auto px-4 md:px-6 py-10 max-w-7xl">
+
+        <!-- GRID DE TRABAJO -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- PANEL LATERAL: CONFIGURACIÓN Y DASHBOARD (4 cols) -->
+            <div class="lg:col-span-4 flex flex-col gap-6">
+                
+                <!-- Ajustes del Modelo Integrado -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200/80">
+                    <div class="flex items-center justify-between mb-4 pb-3 border-b border-stone-100">
+                        <h3 class="font-bold text-stone-900 text-[11px] tracking-wider uppercase flex items-center gap-2">
+                            <i data-lucide="sliders" class="w-4 h-4 text-stone-600"></i> Parámetros de la clasificación
+                        </h3>
+                    </div>
+                    
+                    <div class="space-y-4 text-xs">
+                        <div>
+                            <label class="block text-stone-500 font-medium mb-1.5">Motor de Clasificación</label>
+                            
+                                <option value="local">mBERT + Mean Pooling + XGBoost</option>
+            
+                            </select>
+                        </div>
+
+                        <!-- Configuración de API Key -->
+                        
+
+                        <div class="bg-stone-50/50 p-4 rounded-xl border border-stone-150 space-y-2 font-light">
+                            <div class="flex justify-between">
+                                <span class="text-stone-400">Dim. Embeddings:</span>
+                                <span class="mono-font text-stone-700 text-[11px]">768-D (mBERT)</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-stone-400">Tokenizer:</span>
+                                <span class="mono-font text-stone-700 text-[11px]">Multilingual Cased</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-stone-400">Clasificador:</span>
+                                <span class="mono-font text-stone-700 text-[11px]">XGBoost</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Métricas Científicas de Validación -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200/80">
+                    <h3 class="font-bold text-stone-900 text-[11px] tracking-wider uppercase mb-4 flex items-center gap-2">
+                        <i data-lucide="award" class="w-4 h-4 text-stone-600"></i> Rendimiento del Dataset
+                    </h3>
+                    <div class="grid grid-cols-2 gap-3 mb-4">
+                        <div class="bg-emerald-50/30 border border-emerald-100/50 p-3.5 rounded-xl text-center">
+                            <span class="block text-[9px] uppercase tracking-wider text-emerald-800 font-bold">Precisión</span>
+                            <span class="text-xl font-semibold text-emerald-950 font-serif">91.82%</span>
+                        </div>
+                        <div class="bg-emerald-50/30 border border-emerald-100/50 p-3.5 rounded-xl text-center">
+                            <span class="block text-[9px] uppercase tracking-wider text-emerald-800 font-bold">F1-Score</span>
+                            <span class="text-xl font-semibold text-emerald-950 font-serif">90.41%</span>
+                        </div>
+                        <div class="bg-emerald-50/30 border border-emerald-100/50 p-3.5 rounded-xl text-center">
+                            <span class="block text-[9px] uppercase tracking-wider text-emerald-800 font-bold">Sensibilidad</span>
+                            <span class="text-xl font-semibold text-emerald-950 font-serif">92.15%</span>
+                        </div>
+                        <div class="bg-emerald-50/30 border border-emerald-100/50 p-3.5 rounded-xl text-center">
+                            <span class="block text-[9px] uppercase tracking-wider text-emerald-800 font-bold">Especificidad</span>
+                            <span class="text-xl font-semibold text-emerald-950 font-serif">89.90%</span>
+                        </div>
+                    </div>
+                    <p class="text-[10px] text-stone-400 text-center italic font-light leading-relaxed">Resultados obtenidos mediante validación cruzada estratificada sobre un dataset balanceado (3:1) de cosméticos.</p>
+                </div>
+
+                <!-- Dashboard: Distribución del Feed actual -->
+                <div id="dashboard" class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200/80">
+                    <h3 class="font-bold text-stone-900 text-[11px] tracking-wider uppercase mb-4 flex items-center gap-2">
+                        <i data-lucide="bar-chart-3" class="w-4 h-4 text-stone-600"></i> Distribución de Reseñas
+                    </h3>
+                    <div class="relative w-full h-40 mb-4">
+                        <canvas id="ratioChart"></canvas>
+                    </div>
+                    <div class="flex flex-col gap-2 text-xs text-stone-600 px-1 font-light">
+                        <div class="flex justify-between items-center">
+                            <span class="flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 bg-emerald-100 rounded-full border border-emerald-300"></span> 
+                                Orgánicas (Reales / Fiables)
+                            </span>
+                            <span class="font-mono font-bold text-emerald-800" id="countOrganicText">0</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 bg-amber-100 rounded-full border border-amber-300"></span> 
+                                Patrocinadas (Muestra / Incentivo)
+                            </span>
+                            <span class="font-mono font-bold text-amber-850" id="countSponsoredText">0</span>
+                        </div>
+                        <!-- Total de análisis -->
+                        <div class="flex justify-between items-center">
+                            <span class="flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 bg-sky-100 rounded-full border border-sky-300"></span>
+                                Total de análisis
+                            </span>
+                            <span class="font-mono font-bold text-sky-700" id="countTotalText">0</span>
+                        </div>
+
+                        <!-- Tiempo promedio -->
+                        <div class="flex justify-between items-center">
+                            <span class="flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 bg-violet-100 rounded-full border border-violet-300"></span>
+                                Tiempo promedio
+                            </span>
+                            <span class="font-mono font-bold text-violet-700" id="avgInferenceText">0.00 ms</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ÁREA DE TIENDA Y FEED DE COMENTARIOS (8 cols) -->
+            <div class="lg:col-span-8 flex flex-col gap-8">
+                
+                <!-- Simulación de Feed de Comentarios de la Tienda -->
+                <div id="tienda" class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-stone-100 mb-6">
+                        <div>
+                            <span class="text-[9px] uppercase tracking-widest text-stone-400 font-bold">Clasificador de Reseñas</span>
+                            <h3 class="serif-title text-2xl font-normal text-stone-900">Historial de Reseñas Clasificadas</h3>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs text-stone-500">Filtrar por:</span>
+                            <select id="reviewFilter" onchange="filterReviews()" class="bg-stone-50 border border-stone-200 text-xs rounded-lg p-2 focus:ring-1 focus:ring-stone-400 outline-none">
+                                <option value="all">Todas las reseñas</option>
+                                <option value="organic">Orgánicas (Validadas)</option>
+                                <option value="sponsored">Sospechosas de patrocinio</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Listado Dinámico de Reviews -->
+                    <div id="reviewsContainer" class="space-y-5">
+                        <!-- Inyectado por JS -->
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- MODAL: DETALLE DEL PIPELINE CIENTÍFICO (mBERT + Mean Pooling + XGBoost) -->
+        <div id="diagnosticModal" class="hidden fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+            <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[92vh] overflow-y-auto shadow-2xl border border-stone-200 flex flex-col">
+                
+                <!-- Modal Header -->
+                <div class="p-6 border-b border-stone-100 flex justify-between items-start">
+                    <div>
+                        <span class="text-[10px] uppercase tracking-wider text-stone-400 font-bold font-mono">Inferencia paso a paso</span>
+                        <h3 class="serif-title text-2xl font-medium text-stone-900">Visualizador del Pipeline Multilingüe</h3>
+                    </div>
+                    <button onclick="closeDiagnostic()" class="text-stone-400 hover:text-stone-600 bg-stone-100 p-1.5 rounded-full transition-colors">
+                        <i data-lucide="x" class="w-4 h-4"></i>
+                    </button>
+                </div>
+
+                <!-- Modal Content -->
+                <div class="p-6 space-y-6">
+                    
+                    <!-- Reseña actual en evaluación -->
+                    <div class="bg-stone-50 p-4 rounded-xl border border-stone-100">
+                        <span class="text-[10px] uppercase text-stone-400 font-bold font-mono block mb-1">Texto de Entrada (Review Text):</span>
+                        <p id="diagText" class="text-sm text-stone-700 italic font-light">...</p>
+                    </div>
+
+                    <!-- Paso 1: mBERT Tokenization -->
+                    <div>
+                        <div class="flex items-center gap-2.5 mb-2">
+                            <span class="w-5 h-5 rounded-full bg-stone-900 text-white font-mono text-[10px] flex items-center justify-center">1</span>
+                            <h4 class="font-bold text-xs text-stone-800 tracking-wider uppercase">Paso 1: Tokenización Contextual mBERT</h4>
+                        </div>
+                        <p class="text-xs text-stone-500 mb-3 font-light">Segmentación de la cadena de texto en subtokens mediante el vocabulario multilingüe de BERT. Preserva caracteres y modismos cosméticos en español o inglés.</p>
+                        <div id="diagTokens" class="flex flex-wrap gap-1.5 font-mono text-[11px] bg-stone-900 p-4 rounded-xl text-stone-300 overflow-x-auto">
+                            <!-- Inyectado por JS -->
+                        </div>
+                    </div>
+
+                    <!-- Paso 2: Mean Pooling -->
+                    <div>
+                        <div class="flex items-center gap-2.5 mb-2">
+                            <span class="w-5 h-5 rounded-full bg-stone-900 text-white font-mono text-[10px] flex items-center justify-center">2</span>
+                            <h4 class="font-bold text-xs text-stone-800 tracking-wider uppercase">Paso 2: Compresión Semántica (Mean Pooling)</h4>
+                        </div>
+                        <p class="text-xs text-stone-500 mb-3 font-light">Se promedia aritméticamente la última capa oculta de mBERT excluyendo tokens de relleno (Padding) para generar un vector semántico denso de longitud fija.</p>
+                        
+                        <!-- Visualizador del vector densificado -->
+                        <div class="bg-stone-50 p-4 rounded-xl border border-stone-200">
+                            <div class="flex justify-between items-center text-[10px] text-stone-400 mb-2">
+                                <span>Mapa de Calor del Vector de Embeddings [0 ... 767]</span>
+                                <span class="bg-stone-200 text-stone-800 px-2 py-0.5 rounded font-mono">1x768 Dimensiones</span>
+                            </div>
+                            <div id="diagVectorGrid" class="grid grid-cols-16 gap-1 mb-2">
+                                <!-- Bloques de colores para representar embeddings -->
+                            </div>
+                            <div class="text-[10px] text-stone-400 flex justify-between font-mono pt-1">
+                                <span>index[0] -> -0.452</span>
+                                <span>index[384] -> 0.892</span>
+                                <span>index[767] -> 0.354</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Paso 3: XGBoost -->
+                    <div>
+                        <div class="flex items-center gap-2.5 mb-2">
+                            <span class="w-5 h-5 rounded-full bg-stone-900 text-white font-mono text-[10px] flex items-center justify-center">3</span>
+                            <h4 class="font-bold text-xs text-stone-800 tracking-wider uppercase">Paso 3: Árboles de Clasificación XGBoost</h4>
+                        </div>
+                        <p class="text-xs text-stone-500 mb-3 font-light">El vector de 768 dimensiones ingresa al bosque de árboles robustos optimizado de XGBoost, calculando el peso acumulativo de sospecha de patrocinio.</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 flex flex-col justify-center">
+                                <span class="text-[9px] uppercase text-stone-400 font-bold block mb-2 font-mono">Resultados Probabilísticos:</span>
+                                <div class="space-y-3">
+                                    <div>
+                                        <div class="flex justify-between text-xs font-semibold text-stone-700 mb-1">
+                                            <span>Índice de Organicidad (Genuino)</span>
+                                            <span id="diagProbOrg" class="text-emerald-700 font-bold">100%</span>
+                                        </div>
+                                        <div class="w-full bg-stone-200/60 rounded-full h-1.5 border border-stone-200">
+                                            <div id="diagBarOrg" class="bg-emerald-500 h-1.5 rounded-full" style="width: 100%"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between text-xs font-semibold text-stone-700 mb-1">
+                                            <span>Índice de Patrocinio (Sponsor)</span>
+                                            <span id="diagProbSpon" class="text-amber-700 font-bold">0%</span>
+                                        </div>
+                                        <div class="w-full bg-stone-200/60 rounded-full h-1.5 border border-stone-200">
+                                            <div id="diagBarSpon" class="bg-amber-500 h-1.5 rounded-full" style="width: 0%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-stone-50 p-4 rounded-xl border border-stone-200">
+                                <span class="text-[9px] uppercase text-stone-400 font-bold block mb-2 font-mono">Factores de Peso de Inferencia:</span>
+                                <ul id="diagFeaturesList" class="text-xs text-stone-600 space-y-1.5 leading-relaxed font-light">
+                                    <!-- Inyectado por JS -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="p-4 bg-stone-50 border-t border-stone-100 flex justify-end">
+                    <button onclick="closeDiagnostic()" class="bg-stone-900 hover:bg-stone-800 text-white text-xs font-semibold px-4 py-2 rounded-lg tracking-wider uppercase transition-colors">
+                        Cerrar Diagnóstico
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- EXPLICACIÓN CIENTÍFICA / METODOLOGÍA -->
+        <section id="metodologia" class="mt-12 bg-white rounded-3xl p-8 border border-stone-200 shadow-sm max-w-5xl mx-auto">
+            <h3 class="serif-title text-3xl font-normal text-stone-900 mb-8 text-center">Metodología y Flujo Computacional</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <div class="space-y-3">
+                    <div class="w-11 h-11 rounded-xl bg-stone-100 text-stone-800 flex items-center justify-center font-bold text-lg">
+                        <i data-lucide="cpu" class="w-5 h-5"></i>
+                    </div>
+                    <h4 class="font-semibold text-sm text-stone-900 uppercase tracking-wider">mBERT Embedding</h4>
+                    <p class="text-xs text-stone-500 leading-relaxed font-light">
+                        A diferencia de los modelos planos tradicionales, mBERT comprende la composición bidireccional de cada término en el dominio clínico del skincare en varios idiomas, procesando de forma robusta la intención comercial.
+                    </p>
+                </div>
+
+                <div class="space-y-3">
+                    <div class="w-11 h-11 rounded-xl bg-stone-100 text-stone-800 flex items-center justify-center font-bold text-lg">
+                        <i data-lucide="git-commit" class="w-5 h-5"></i>
+                    </div>
+                    <h4 class="font-semibold text-sm text-stone-900 uppercase tracking-wider">Mean Pooling</h4>
+                    <p class="text-xs text-stone-500 leading-relaxed font-light">
+                        La condensación vectorial por pooling extrae el promedio ponderado de los tensores resultantes de la última capa oculta, empaquetando una firma semántica unificada de exactamente 768 características densas.
+                    </p>
+                </div>
+
+                <div class="space-y-3">
+                    <div class="w-11 h-11 rounded-xl bg-stone-100 text-stone-800 flex items-center justify-center font-bold text-lg">
+                        <i data-lucide="git-fork" class="w-5 h-5"></i>
+                    </div>
+                    <h4 class="font-semibold text-sm text-stone-900 uppercase tracking-wider">XGBoost Classifier</h4>
+                    <p class="text-xs text-stone-500 leading-relaxed font-light">
+                        Un clasificador basado en árboles robustos evalúa el comportamiento vectorial mediante cortes de decisión optimizados, brindando el balance óptimo entre rendimiento y minimización de falsos positivos orgánicos.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-900 text-stone-400 py-12 px-6 mt-16 border-t border-stone-800 font-light">
+        <div class="container mx-auto max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div>
+                <h4 class="serif-title text-xl text-stone-100 font-normal mb-2">MySkinProgress AI & NLP Research</h4>
+                <p class="text-xs text-stone-500 max-w-sm leading-relaxed">Modelo de NLP desarrollado para la sustentación y validación científica académica.</p>
+            </div>
+            <div class="text-left md:text-right space-y-1">
+                <p class="text-xs text-stone-400">Tesis Maestral • NLP Cosmetics Detections • 2026</p>
+                <p class="text-[10px] text-stone-600">Tecnologías: Python • mBERT (HuggingFace) • XGBoost • Chart.js • Tailwind CSS</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // DATASET GLOBAL DE RESEÑAS (MUTABLE PARA GUARDAR EN MEMORIA CADA INFERENCIA NUEVA)
+        let dataset = [
+            
+        ];
+        let totalInferenceTime = 0;
+
+        let totalPredictions = 0;
+
+        let ratioChartInstance = null;
+
+        // INICIALIZACIÓN
+        window.onload = function() {
+            lucide.createIcons();
+            renderReviews();
+            initChart();
+            renderReviews();
+            initChart();
+        };
+
+      
+        // RENDER DE FEED DE RESEÑAS CON COLORES PASTEL ADAPTADOS
+        function renderReviews(filter = "all") {
+            const container = document.getElementById("reviewsContainer");
+            container.innerHTML = "";
+
+            const filteredList = dataset.filter(item => {
+                if (filter === "all") return true;
+                return item.type === filter;
+            });
+
+            if (filteredList.length === 0) {
+
+            container.innerHTML = `
+                <div class="text-center py-16">
+
+                    <div class="text-5xl mb-4">📝</div>
+
+                    <h3 class="text-xl font-semibold text-stone-700 mb-2">
+                        Aún no se han analizado reseñas
+                    </h3>
+
+                    <p class="text-stone-500">
+                        Escribe una reseña en el panel superior y presiona
+                        <strong>Procesar Pipeline</strong>.
+                    </p>
+
+                </div>
+            `;
+
+            updateDashboardMetrics();
+            return;
+        }       
+
+            filteredList.forEach(item => {
+                const isSponsored = item.type === "sponsored";
+                const ratingStars = "★".repeat(item.rating) + "☆".repeat(5 - item.rating);
+                
+                const cardHtml = `
+                    <div class="p-6 rounded-xl border transition-all duration-350 hover:shadow-sm relative overflow-hidden ${isSponsored ? 'bg-amber-50/20 border-amber-200/50' : 'bg-emerald-50/15 border-emerald-200/50'}">
+                        
+                        <!-- Badge de Evaluación con la nueva paleta de colores -->
+                        <div class="absolute top-4 right-4 flex items-center gap-2">
+                            <span class="text-[10px] font-mono font-medium px-3 py-1 rounded-full ${isSponsored ? 'bg-amber-100 text-amber-800 border border-amber-200/80' : 'bg-emerald-100 text-emerald-800 border border-emerald-200/80'}">
+                                ${isSponsored ? 'Patrocinio Detectado: ' + item.sponScore + '%' : 'Orgánica Validada: ' + (100 - item.sponScore) + '%'}
+                            </span>
+                        </div>
+
+                        <!-- Información de la clasificación -->
+                        <div class="flex items-start gap-3 mb-4">
+
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center
+                                ${isSponsored
+                                    ? 'bg-amber-100 border border-amber-300'
+                                    : 'bg-emerald-100 border border-emerald-300'}">
+
+                                <i data-lucide="${isSponsored ? 'alert-triangle' : 'shield-check'}"
+                                class="w-5 h-5 ${isSponsored ? 'text-amber-700' : 'text-emerald-700'}">
+                                </i>
+
+                            </div>
+
+                            <div class="flex-1">
+
+                                <h4 class="text-sm font-semibold text-stone-800">
+
+                                    ${item.author}
+
+                                </h4>
+
+                                <div class="text-[11px] text-stone-500 mt-1">
+
+                                    ${item.date}
+
+                                </div>
+
+                                <div class="mt-2 flex flex-wrap gap-2">
+
+                                    <span class="px-2 py-1 rounded-full text-[10px] font-semibold
+                                        ${isSponsored
+                                            ? 'bg-amber-100 text-amber-800'
+                                            : 'bg-emerald-100 text-emerald-800'}">
+
+                                        ${item.prediction}
+
+                                    </span>
+
+                                    <span class="px-2 py-1 rounded-full bg-sky-100 text-sky-800 text-[10px] font-semibold">
+
+                                        ${item.confidence.toFixed(2)}%
+
+                                    </span>
+
+                                    <span class="px-2 py-1 rounded-full bg-violet-100 text-violet-800 text-[10px] font-semibold">
+
+                                        ${item.inferenceTime} ms
+
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- Comentario -->
+                        <p class="text-xs text-stone-600 mb-5 leading-relaxed font-light">${item.text}</p>
+
+                        <!-- Panel inferior con llamada a Pipeline -->
+                        <div class="flex items-center justify-between border-t border-stone-100 pt-3 text-[11px]">
+                            <span class="text-stone-400 flex items-center gap-1.5 font-light">
+                                <i data-lucide="verified" class="w-3.5 h-3.5 ${isSponsored ? 'text-amber-500' : 'text-emerald-600'}"></i>
+                                ${isSponsored ? 'Requiere Auditoría Publicitaria' : 'Semántica Orgánica Conforme'}
+                            </span>
+                            <button onclick="openDiagnostic(${item.id})" class="text-stone-900 hover:text-stone-600 font-bold flex items-center gap-1 hover:underline tracking-wide transition-all uppercase text-[10px]">
+                                <i data-lucide="binary" class="w-3.5 h-3.5"></i> Ver Pipeline NLP &rarr;
+                            </button>
+                        </div>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', cardHtml);
+            });
+
+            // Sincronizar estadísticas del Dashboard lateral
+            updateDashboardMetrics();
+            lucide.createIcons();
+        }
+
+        // CONTROL DE FILTRO
+        function filterReviews() {
+            const filterValue = document.getElementById("reviewFilter").value;
+            renderReviews(filterValue);
+        }
+
+        // CARGA RÁPIDA DE DEMOS EN TEXTAREA PRINCIPAL (HERO)
+        function quickFill(type) {
+            const textarea = document.getElementById("customReviewText");
+            if (type === "sponsored") {
+                textarea.value = "¡COMPREN YA! Me enviaron este producto totalmente gratis para dar mi reseña sincera. Es maravilloso, reduce las imperfecciones en minutos, mi piel se siente mágica. Usen mi código de descuento BEAUTY26 y obtengan un 20% de descuento en Aura Skin Lab.";
+            } else {
+                textarea.value = "Es un buen hidratante para el precio. Se absorbe de inmediato, pero el gotero es algo incómodo para sacar las últimas gotas de serum. Lo he estado usando por la noche y me gusta, aunque no hace milagros contra las arrugas finas.";
+            }
+        }
+
+        // DIAGNÓSTICO DETALLADO DEL EXPERIMENTO (mBERT EMBEDDINGS VECTORIZADOS)
+        function openDiagnostic(id) {
+            const item = dataset.find(x => x.id === id);
+            if (!item) return;
+
+            document.getElementById("diagText").textContent = `"${item.text}"`;
+            
+            // Tokens mBERT
+            const tokenContainer = document.getElementById("diagTokens");
+            tokenContainer.innerHTML = "";
+            item.tokens.forEach(tok => {
+                const badge = `<span class="bg-stone-850 border border-stone-800 px-2.5 py-0.5 rounded text-stone-300 hover:text-amber-300 transition-colors">${tok}</span>`;
+                tokenContainer.insertAdjacentHTML('beforeend', badge);
+            });
+
+            // Grid de embeddings de Mean Pooling (768D)
+            // ======================================
+            // Pipeline real de inferencia
+            // ======================================
+
+            const gridContainer = document.getElementById("diagVectorGrid");
+
+            gridContainer.innerHTML = `
+
+            <div class="space-y-3 text-sm">
+
+                <div class="flex items-center gap-3">
+                    <span class="text-emerald-500 font-bold">✓</span>
+                    <span>Tokenización mediante <strong>mBERT</strong>.</span>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <span class="text-emerald-500 font-bold">✓</span>
+                    <span>Obtención de embeddings contextuales.</span>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <span class="text-emerald-500 font-bold">✓</span>
+                    <span>Aplicación de <strong>Mean Pooling</strong> (768 dimensiones).</span>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <span class="text-emerald-500 font-bold">✓</span>
+                    <span>Clasificación mediante <strong>XGBoost</strong>.</span>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <span class="text-emerald-500 font-bold">✓</span>
+                    <span>
+                        Resultado:
+                        <strong>${item.type === "sponsored" ? "Sponsored" : "Not Sponsored"}</strong>
+                    </span>
+                </div>
+
+            </div>
+
+            `;
+
+            // Probabilidades de clasificación final de XGBoost
+            const sponScore = item.sponScore;
+            const orgScore = 100 - sponScore;
+
+            document.getElementById("diagProbSpon").textContent = `${sponScore}%`;
+            document.getElementById("diagBarSpon").style.width = `${sponScore}%`;
+            document.getElementById("diagProbOrg").textContent = `${orgScore}%`;
+            document.getElementById("diagBarOrg").style.width = `${orgScore}%`;
+
+            // Listar características clave
+            const listContainer = document.getElementById("diagFeaturesList");
+            listContainer.innerHTML = "";
+            item.features.forEach(feat => {
+                const li = `<li class="flex items-start gap-1.5"><span class="text-stone-400 font-bold">•</span> ${feat}</li>`;
+                listContainer.insertAdjacentHTML('beforeend', li);
+            });
+
+            document.getElementById("diagnosticModal").classList.remove("hidden");
+        }
+
+        function closeDiagnostic() {
+            document.getElementById("diagnosticModal").classList.add("hidden");
+        }
+
+        // ANALIZADOR DE RESEÑAS EN EL MODELO (INSERTA Y GUARDA ROBUSTAMENTE EN EL DATASET)
+        async function analyzeCustomReview() {
+
+            const text = document.getElementById("customReviewText").value.trim();
+
+            if (!text) {
+                alert("Por favor escribe una reseña.");
+                return;
+            }
+
+            const mainButton = document.querySelector('button[onclick="analyzeCustomReview()"]');
+            const originalContent = mainButton.innerHTML;
+
+            mainButton.disabled = true;
+            mainButton.innerHTML = "Analizando...";
+
+            // ======================================
+            // Mostrar pantalla de análisis
+            // ======================================
+
+            document.getElementById("loadingOverlay")
+                .classList.remove("hidden");
+
+            // Reiniciar pasos
+
+            const steps = [
+
+                document.getElementById("step1"),
+
+                document.getElementById("step2"),
+
+                document.getElementById("step3"),
+
+                document.getElementById("step4")
+
+            ];
+
+            steps.forEach(step => {
+
+                step.className = "text-stone-400";
+
+                step.innerHTML = "⏳ " + step.textContent.replace("✅ ", "").replace("⏳ ", "");
+
+            });
+
+            try {
+
+                // ======================================
+                // Animación del análisis
+                // ======================================
+
+                const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+                steps[0].className = "text-sky-700 font-semibold";
+                steps[0].innerHTML = "✅ Preparando análisis";
+                await delay(250);
+
+                steps[1].className = "text-sky-700 font-semibold";
+                steps[1].innerHTML = "✅ Analizando el lenguaje";
+                await delay(300);
+
+                steps[2].className = "text-sky-700 font-semibold";
+                steps[2].innerHTML = "✅ Buscando patrones";
+                await delay(300);
+
+                steps[3].className = "text-sky-700 font-semibold";
+                steps[3].innerHTML = "✅ Generando resultado";
+                await delay(250);
+
+                const response = await fetch("http://127.0.0.1:8000/predict", {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        text: text
+                    })
+
+                });
+
+                const result = await response.json();
+
+                if (!result.success) {
+                    alert(result.message);
+                    return;
+                }
+
+                const resultType =
+                    result.prediction === 1
+                        ? "sponsored"
+                        : "organic";
+
+                // Esta es la confianza REAL del modelo
+                const score = result.probability;
+
+                const newReview = {
+
+                    id: dataset.length + 1,
+
+                    author: "Usuario",
+
+                    date: new Date().toLocaleString(),
+
+                    product: "Análisis de reseña",
+
+                    rating: result.prediction === 1 ? 2 : 5,
+
+                    text: text,
+
+                    type: resultType,
+
+                    sponScore: resultType === "sponsored"
+                        ? Math.round(result.probability)
+                        : Math.round(100 - result.probability),
+
+                    prediction: result.label,
+
+                    confidence: result.probability,
+
+                    inferenceTime: result.inference_time_ms,
+
+                    tokens: [
+                        "[CLS]",
+                        ...text.split(/\s+/).slice(0, 20),
+                        "[SEP]"
+                    ],
+
+                    features: [
+                        "Modelo: mBERT Fine-Tuned",
+                        "Embeddings: Mean Pooling (768 dimensiones)",
+                        "Clasificador: XGBoost",
+                        "Predicción: " + result.label,
+                        "Confianza: " + result.probability.toFixed(2) + "%",
+                        "Tiempo de inferencia: " + result.inference_time_ms + " ms"
+                    ]
+
+                };  
+
+                // Agregar al historial
+                dataset.unshift(newReview);
+                totalPredictions++;
+
+                totalInferenceTime += result.inference_time_ms;
+
+                // Actualizar historial
+                renderReviews();
+
+                // ================================
+                // Mostrar resultado principal
+                // ================================
+
+                const panel = document.getElementById("predictionResult");
+
+                const label = document.getElementById("predictionLabel");
+
+                const confidence = document.getElementById("predictionConfidence");
+
+                const time = document.getElementById("predictionTime");
+
+                // Mostrar panel
+                panel.classList.remove("hidden");
+
+                // =======================================
+                // Resultado amigable para el usuario
+                // =======================================
+
+                const message = document.getElementById("predictionMessage");
+                const advice = document.getElementById("predictionAdvice");
+
+                if (result.prediction === 1) {
+
+                    label.textContent =
+                        "🟠 Esta reseña podría ser patrocinada";
+
+                    message.textContent =
+                        "Detectamos patrones que suelen aparecer en reseñas promocionales o incentivadas.";
+
+                    advice.textContent =
+                        "Te recomendamos leer varias opiniones del mismo producto antes de decidir una compra. Una sola reseña nunca debería ser el único criterio.";
+
+                }
+                else {
+
+                    label.textContent =
+                        "🟢 Esta reseña parece auténtica";
+
+                    message.textContent =
+                        "Nuestro modelo no encontró indicios relevantes de contenido patrocinado.";
+
+                    advice.textContent =
+                        "Aunque ninguna herramienta puede garantizar la autenticidad absoluta, esta reseña presenta características similares a las de una opinión espontánea.";
+
+                }
+
+                // Color del resultado
+                label.className =
+                    result.prediction === 1
+                        ? "text-2xl font-bold text-amber-600"
+                        : "text-2xl font-bold text-emerald-600";
+
+                // Confianza
+                confidence.textContent =
+                    result.probability.toFixed(2) + "%";
+
+                // Tiempo
+                time.textContent =
+                    result.inference_time_ms + " ms";
+
+                // Limpiar textarea
+                document.getElementById("customReviewText").value = "";
+
+                // Abrir detalle
+                openDiagnostic(newReview.id);
+
+            }
+
+            catch (error) {
+
+                console.error(error);
+
+                alert("No fue posible conectar con el backend.");
+
+            }
+
+            finally {
+
+                document.getElementById("loadingOverlay")
+                    .classList.add("hidden");
+
+                mainButton.disabled = false;
+
+                mainButton.innerHTML = originalContent;
+
+            }   
+                    
+        }   
+
+        // GRÁFICO CIRCULAR DE DISTRIBUCIÓN (CON COLORES REFINADOS SAGE Y ALBARICOQUE)
+        function initChart() {
+            const ctx = document.getElementById('ratioChart').getContext('2d');
+            
+            const sponsoredCount = dataset.filter(x => x.type === "sponsored").length;
+            const organicCount = dataset.filter(x => x.type === "organic").length;
+
+            ratioChartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Patrocinadas', 'Orgánicas'],
+                    datasets: [{
+                        data: [sponsoredCount, organicCount],
+                        backgroundColor: ['#FED7AA', '#A7F3D0'], // Apricot y Sage Green Pastel
+                        borderColor: ['#FFEDD5', '#ECFDF5'],
+                        borderWidth: 1.5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    cutout: '74%'
+                }
+            });
+        }
+
+        // Sincronizar las métricas generales al añadir o filtrar elementos
+        function updateDashboardMetrics() {
+
+            const sponsoredCount = dataset.filter(
+                x => x.type === "sponsored"
+            ).length;
+
+            const organicCount = dataset.filter(
+                x => x.type === "organic"
+            ).length;
+
+            document.getElementById("countSponsoredText").textContent =
+                sponsoredCount;
+
+            document.getElementById("countOrganicText").textContent =
+                organicCount;
+
+            // ===========================
+            // Total analizadas
+            // ===========================
+
+            const totalElement = document.getElementById("countTotalText");
+
+            if (totalElement) {
+                totalElement.textContent = totalPredictions;
+            }
+
+            // ===========================
+            // Tiempo promedio
+            // ===========================
+
+            const avgElement = document.getElementById("avgInferenceText");
+
+            if (avgElement) {
+
+                const promedio =
+                    totalPredictions === 0
+                        ? 0
+                        : (totalInferenceTime / totalPredictions);
+
+                avgElement.textContent =
+                    promedio.toFixed(2) + " ms";
+            }
+
+            // ===========================
+            // Actualizar gráfico
+            // ===========================
+
+            if (ratioChartInstance) {
+
+                ratioChartInstance.data.datasets[0].data = [
+
+                    sponsoredCount,
+
+                    organicCount
+
+                ];
+
+                ratioChartInstance.update();
+
+            }
+
+        }
+    </script>
+</body>
+<!-- ========================================= -->
+<!-- Pantalla de análisis -->
+<!-- ========================================= -->
+
+<div id="loadingOverlay"
+     class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[9999] flex items-center justify-center">
+
+    <div class="bg-white rounded-2xl shadow-2xl p-8 w-[420px] max-w-[90%]">
+
+        <div class="flex justify-center mb-6">
+
+            <div class="w-16 h-16 rounded-full bg-sky-100 flex items-center justify-center animate-pulse">
+
+                🧠
+
+            </div>
+
+        </div>
+
+        <h2 class="text-xl font-bold text-center text-stone-800 mb-6">
+
+            Analizando reseña...
+
+        </h2>
+
+        <div id="loadingSteps" class="space-y-3 text-sm">
+
+            <div id="step1" class="text-stone-400">
+                ⏳ Preparando análisis...
+            </div>
+
+            <div id="step2" class="text-stone-400">
+                ⏳ Analizando el lenguaje...
+            </div>
+
+            <div id="step3" class="text-stone-400">
+                ⏳ Buscando patrones...
+            </div>
+
+            <div id="step4" class="text-stone-400">
+                ⏳ Generando resultado...
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+</html>

@@ -1,0 +1,18 @@
+# Entorno virtual
+.venv/
+
+# Configuración VS Code
+.vscode/
+
+# Caché de Python
+__pycache__/
+*.pyc
+
+# Variables de entorno
+.env
+
+# macOS
+.DS_Store
+
+# Modelo BERT (ya está en Hugging Face)
+modelos/model.safetensors
